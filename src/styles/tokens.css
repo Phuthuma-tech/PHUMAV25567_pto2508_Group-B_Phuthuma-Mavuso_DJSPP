@@ -1,0 +1,94 @@
+/**
+ * tokens.css
+ * Shared design tokens: a dark, warm palette with Fraunces for display
+ * type, Inter for body text, and JetBrains Mono for numeric/utility detail.
+ */
+
+:root {
+  /* Color */
+  --color-bg: #17130f;
+  --color-bg-raised: #211b16;
+  --color-bg-card: #26201a;
+  --color-border: #3a322a;
+  --color-border-soft: #2c261f;
+
+  --color-text: #f3ece2;
+  --color-text-muted: #b8ab9b;
+  --color-text-faint: #8a7d6d;
+
+  --color-accent: #e8823c;
+  --color-accent-strong: #ff9d54;
+  --color-accent-soft: rgba(232, 130, 60, 0.16);
+
+  --color-success: #7fae6a;
+  --color-error: #e2685a;
+  --color-error-soft: rgba(226, 104, 90, 0.14);
+
+  --color-overlay: rgba(10, 8, 6, 0.72);
+
+  /* Type */
+  --font-display: "Fraunces", "Georgia", serif;
+  --font-body: "Inter", system-ui, sans-serif;
+  --font-mono: "JetBrains Mono", "SFMono-Regular", monospace;
+
+  /* Layout */
+  --radius-sm: 6px;
+  --radius-md: 12px;
+  --radius-lg: 20px;
+  --max-width: 1200px;
+
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 24px;
+  --space-6: 32px;
+  --space-7: 48px;
+  --space-8: 64px;
+
+  --shadow-card: 0 1px 2px rgba(0, 0, 0, 0.3), 0 8px 24px rgba(0, 0, 0, 0.25);
+  --shadow-modal: 0 20px 60px rgba(0, 0, 0, 0.5);
+  --transition-base: 160ms ease;
+}
+
+/**
+ * Light theme overrides. Applied by setting data-theme="light" on <html>
+ * (see ThemeContext). Every component reads colours exclusively through
+ * these custom properties, so this block is the only place light mode
+ * needs to be defined.
+ */
+:root[data-theme="light"] {
+  --color-bg: #faf6ef;
+  --color-bg-raised: #f2ecdf;
+  --color-bg-card: #ffffff;
+  --color-border: #ddd2bf;
+  --color-border-soft: #e8e0d0;
+
+  --color-text: #2a2118;
+  --color-text-muted: #5c5041;
+  --color-text-faint: #8c8070;
+
+  --color-accent: #d9701f;
+  --color-accent-strong: #b85614;
+  --color-accent-soft: rgba(217, 112, 31, 0.12);
+
+  --color-success: #4f7d3c;
+  --color-error: #c94a3a;
+  --color-error-soft: rgba(201, 74, 58, 0.1);
+
+  --color-overlay: rgba(40, 32, 20, 0.45);
+
+  --shadow-card: 0 1px 2px rgba(30, 20, 10, 0.06), 0 8px 24px rgba(30, 20, 10, 0.08);
+  --shadow-modal: 0 20px 60px rgba(30, 20, 10, 0.18);
+}
+
+/* Smooth, app-wide crossfade when the theme attribute changes. */
+body,
+.site-header,
+.show-card,
+.show-detail__image,
+.quick-view__content,
+.audio-player {
+  transition: background-color var(--transition-base), color var(--transition-base),
+    border-color var(--transition-base), box-shadow var(--transition-base);
+}

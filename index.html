@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>Podcast Explorer — Discover Your Next Favourite Show</title>
+    <meta
+      name="description"
+      content="Search, filter, and sort hundreds of podcast shows across comedy, history, fiction, business, and more — then dive into full season and episode detail."
+    />
+
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+
+    <!--
+      Social preview metadata. Generated via https://metatags.io — update
+      og:url and og:image once the app has a real deployed domain and a
+      rendered preview image (metatags.io can help produce both).
+    -->
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="Podcast Explorer — Discover Your Next Favourite Show" />
+    <meta
+      property="og:description"
+      content="Search, filter, and sort hundreds of podcast shows, then listen with a persistent player, favourite episodes, and pick up where you left off."
+    />
+    <meta property="og:image" content="/og-image.png" />
+    <meta property="og:url" content="https://podcast-explorer.vercel.app" />
+
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Podcast Explorer — Discover Your Next Favourite Show" />
+    <meta
+      name="twitter:description"
+      content="Search, filter, and sort hundreds of podcast shows, then listen with a persistent player, favourite episodes, and pick up where you left off."
+    />
+    <meta name="twitter:image" content="/og-image.png" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <script>
+      (function () {
+        try {
+          var saved = JSON.parse(localStorage.getItem("podcastExplorer:theme"));
+          var theme =
+            saved === "light" || saved === "dark"
+              ? saved
+              : window.matchMedia("(prefers-color-scheme: light)").matches
+              ? "light"
+              : "dark";
+          document.documentElement.setAttribute("data-theme", theme);
+        } catch (error) {
+          document.documentElement.setAttribute("data-theme", "dark");
+        }
+      })();
+    </script>
+    <div id="root"></div>
+    <script type="module" src="/src/main.jsx"></script>
+  </body>
+</html>
