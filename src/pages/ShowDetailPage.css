@@ -1,0 +1,70 @@
+.show-detail__back {
+  display: inline-block;
+  margin-bottom: var(--space-5);
+  font-size: 0.85rem;
+  color: var(--color-text-muted);
+  transition: color var(--transition-base);
+}
+
+.show-detail__back:hover {
+  color: var(--color-accent-strong);
+}
+
+.show-detail__hero {
+  display: grid;
+  grid-template-columns: 260px 1fr;
+  gap: var(--space-6);
+  margin-bottom: var(--space-7);
+}
+
+.show-detail__image {
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  object-fit: cover;
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-card);
+}
+
+.show-detail__info {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+}
+
+.show-detail__title {
+  font-size: clamp(1.6rem, 3vw, 2.4rem);
+}
+
+.show-detail__description {
+  color: var(--color-text-muted);
+  max-width: 60ch;
+  line-height: 1.65;
+}
+
+.show-detail__updated {
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  color: var(--color-text-faint);
+}
+
+.show-detail__seasons-heading {
+  font-size: 1.3rem;
+  margin-bottom: var(--space-4);
+}
+
+.show-detail__seasons-count {
+  font-family: var(--font-mono);
+  font-size: 0.9rem;
+  color: var(--color-text-faint);
+  font-weight: 400;
+}
+
+@media (max-width: 720px) {
+  .show-detail__hero {
+    grid-template-columns: 1fr;
+  }
+
+  .show-detail__image {
+    max-width: 220px;
+  }
+}

@@ -1,0 +1,68 @@
+.season-accordion {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.season-accordion__item {
+  border: 1px solid var(--color-border-soft);
+  border-radius: var(--radius-md);
+  background: var(--color-bg-card);
+  overflow: hidden;
+}
+
+.season-accordion__header {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: var(--space-4);
+  padding: var(--space-4);
+  background: none;
+  border: none;
+  color: var(--color-text);
+  text-align: left;
+}
+
+.season-accordion__thumb {
+  width: 48px;
+  height: 48px;
+  border-radius: var(--radius-sm);
+  object-fit: cover;
+  flex-shrink: 0;
+}
+
+.season-accordion__heading {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.season-accordion__title {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 1.05rem;
+}
+
+.season-accordion__count {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  color: var(--color-text-faint);
+}
+
+.season-accordion__chevron {
+  font-size: 1.4rem;
+  color: var(--color-accent-strong);
+  width: 24px;
+  text-align: center;
+}
+
+.season-accordion__episodes {
+  padding: 0 var(--space-4) var(--space-4);
+  border-top: 1px solid var(--color-border-soft);
+  list-style: none;
+  margin: 0;
+}

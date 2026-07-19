@@ -1,0 +1,198 @@
+.quick-view {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  overflow-y: auto;
+  padding: var(--space-6) var(--space-4);
+  background: var(--color-overlay);
+  backdrop-filter: blur(3px);
+}
+
+.quick-view__content {
+  position: relative;
+  width: 100%;
+  max-width: 720px;
+  background: var(--color-bg-card);
+  border: 1px solid var(--color-border-soft);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-modal);
+  padding: var(--space-6);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-5);
+}
+
+.quick-view__close {
+  position: absolute;
+  top: var(--space-4);
+  right: var(--space-4);
+  width: 32px;
+  height: 32px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid var(--color-border);
+  border-radius: 50%;
+  background: var(--color-bg-raised);
+  color: var(--color-text-muted);
+  font-size: 0.9rem;
+  transition: border-color var(--transition-base), color var(--transition-base);
+}
+
+.quick-view__close:hover {
+  border-color: var(--color-accent);
+  color: var(--color-accent-strong);
+}
+
+.quick-view__title {
+  font-size: 1.5rem;
+  padding-right: var(--space-7);
+}
+
+.quick-view__banner {
+  display: grid;
+  grid-template-columns: 180px 1fr;
+  gap: var(--space-5);
+}
+
+.quick-view__image {
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  object-fit: cover;
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-card);
+}
+
+.quick-view__info {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+
+.quick-view__seasons-heading {
+  font-size: 1rem;
+  color: var(--color-text-muted);
+}
+
+.quick-view__tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+}
+
+.quick-view__tag {
+  font-size: 0.78rem;
+  padding: 4px 10px;
+  border-radius: 999px;
+  background: var(--color-accent-soft);
+  color: var(--color-accent-strong);
+}
+
+.quick-view__description {
+  color: var(--color-text-muted);
+  line-height: 1.6;
+  font-size: 0.92rem;
+}
+
+.quick-view__updated {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  color: var(--color-text-faint);
+}
+
+.quick-view__seasons-list-heading {
+  font-size: 1rem;
+  margin-bottom: var(--space-3);
+}
+
+.quick-view__seasons ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  max-height: 240px;
+  overflow-y: auto;
+}
+
+.quick-view__season-item {
+  display: flex;
+  justify-content: space-between;
+  gap: var(--space-3);
+  padding: var(--space-2) var(--space-3);
+  border-radius: var(--radius-sm);
+  background: var(--color-bg-raised);
+  font-size: 0.85rem;
+}
+
+.quick-view__season-episodes {
+  font-family: var(--font-mono);
+  color: var(--color-text-faint);
+  white-space: nowrap;
+}
+
+.quick-view__full-link {
+  align-self: flex-start;
+  font-size: 0.85rem;
+  color: var(--color-accent-strong);
+  border-bottom: 1px solid transparent;
+  transition: border-color var(--transition-base);
+}
+
+.quick-view__full-link:hover {
+  border-color: var(--color-accent-strong);
+}
+
+.quick-view__status {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-3);
+  text-align: center;
+  padding: var(--space-8) var(--space-4);
+  color: var(--color-text-muted);
+}
+
+.quick-view__status--error {
+  color: var(--color-error);
+}
+
+.quick-view__spinner {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  border: 3px solid var(--color-border);
+  border-top-color: var(--color-accent-strong);
+  animation: quick-view-spin 0.8s linear infinite;
+}
+
+@keyframes quick-view-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .quick-view__spinner {
+    animation: none;
+  }
+}
+
+@media (max-width: 640px) {
+  .quick-view__banner {
+    grid-template-columns: 1fr;
+  }
+
+  .quick-view__image {
+    max-width: 200px;
+  }
+
+  .quick-view__content {
+    padding: var(--space-5);
+  }
+}

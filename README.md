@@ -1,104 +1,85 @@
-# 🎧 DJS Portfolio Piece – Podcast App (React)
+# Podcast Explorer — Unified
 
-## 📋 Overview
+A single React + Vite application that merges **DJS03**, **DJS04**, and **DJS05**
+into one codebase, keeping every distinct feature from all three.
 
-In this final phase, you will enhance the podcast app you've been building throughout the DJS course. The app already includes a landing page with searchable, sortable, and filterable podcast previews, as well as a show detail page with season toggling.
+## Why this structure
 
-This project introduces key new features including global audio playback, favouriting episodes, deployment best practices, UI enhancements, and optional listening progress tracking.
+The three projects turned out to be three stages of the *same* app, each
+adding a layer on top of the last:
 
-Your goal is to build a polished, production-ready React application that offers an engaging and seamless user experience.
+- **DJS03** — fetch + render a grid, click a card → fetch full detail →
+  show it in a **modal**. Genre filter, sort, hero section.
+- **DJS04** — same idea, but with a real **search box**, a dedicated
+  **Toolbar** (search + genre + sort + live result count + "Clear filters"),
+  and **pagination** driven by a single `usePodcastExplorer` hook.
+- **DJS05** — the most advanced version: search/genre/sort/pagination state
+  lives in the **URL** (`useSearchParams`) instead of component state, and
+  clicking a show navigates to a **dedicated `/show/:id` route** with a full
+  season/episode accordion, instead of a modal.
 
-> **Tip:** You are encouraged to explore the React ecosystem to help implement features efficiently.
+Because DJS05 is architecturally a superset of DJS04 (URL state does
+everything local state did, plus deep-linking and back-button support) and
+DJS04 is a superset of DJS03 (search + pagination + toolbar polish on top of
+the same fetch/filter/sort idea), **DJS05 was used as the base**. Nothing
+from DJS04 or DJS03 needed reinventing — it needed porting onto the newer
+foundation.
 
-## 🎯 Objectives
+## What was merged in on top of the DJS05 base
 
-- Implement a global audio player with full playback control
-- Add support for favouriting episodes with persistent storage
-- Introduce a recommended shows carousel on the landing page
-- Support theme toggling (light/dark mode)
-- Ensure robust routing and deploy the app with professional polish
-- Optionally track listening progress across episodes and sessions
+| Feature | From | Where it lives now |
+|---|---|---|
+| URL-synced search / genre / sort / pagination | DJS05 | `hooks/useShowListQuery.js` |
+| Routed show detail page + season/episode accordion | DJS05 | `pages/ShowDetailPage.jsx`, `components/SeasonAccordion`, `components/EpisodeCard` |
+| sessionStorage "back to shows" (preserves filters) | DJS05 | `pages/HomePage.jsx` (`LAST_HOME_URL_KEY`) |
+| Hero/intro banner | DJS03 | `components/Hero/Hero.jsx` |
+| **Quick-view modal** (glance at a show without leaving the grid) | DJS03 | `hooks/useQuickView.js`, `components/QuickViewModal` |
+| Relative + short date formatting for the modal | DJS03 | `utils/formatDate.js` (`formatRelativeDate`, `formatShortDate`) |
+| Live "N shows found" result count | DJS04 | `components/Filters/Filters.jsx` |
+| "Clear filters" reset button | DJS04 | `components/Filters/Filters.jsx`, `useShowListQuery().resetFilters` |
+| Search input icon | DJS04 | `components/Filters/Filters.jsx` |
 
-## 🚀 Core Features & User Stories
+### The one deliberate behavior change
 
-### 🛠️ Setup and Deployment
+Each `ShowCard` now supports **two ways to open a show**:
 
-- Deploy your app to **Vercel** using a **custom domain or URL**
-- Add a **custom favicon** for easy identification in browser tabs
-- Use tools like [metatags.io](https://metatags.io) to set **rich social media preview metadata**
-- Ensure that direct access to dynamic routes (e.g. `/show/1`) works correctly (SPA routing fallback)
+- Clicking the card **navigates** to `/show/:id` — DJS05's full page, with
+  the complete season/episode accordion.
+- Hovering reveals a **"Quick view" button** that opens DJS03's modal
+  in-place (no navigation), for a fast glance at the description, genres,
+  and season count. The modal includes a link through to the full page.
 
-### 🔊 Global Audio Player
+This means no feature was dropped in the merge — DJS03's modal and DJS05's
+routed page coexist, each doing the job it's best at.
 
-- Play audio using the provided **placeholder API**
-- Keep the player **fixed at the bottom** of the screen across all pages
-- Ensure **uninterrupted playback** when navigating between pages
-- Provide **play, pause, seek, and progress tracking**
-- Add a **confirmation prompt** on page reloads during playback
+## Running it
 
-### ❤️ Favourites
+```bash
+npm install
+npm run dev      # http://localhost:5173
+npm run build    # production build to dist/
+npm run preview  # serve the production build locally
+```
 
-- Allow users to **favourite or unfavourite episodes** via a button/icon
-- Use **localStorage** to persist favourites across sessions
-- Provide **visual feedback** for favourited items (e.g., filled heart)
-- Create a **favourites page** displaying all saved episodes
-- Display **associated show and season** for each favourite
-- Show the **date/time added** to favourites
-- **Group favourites by show title**
-- Add **sorting options**:
-  - A–Z / Z–A by title
-  - Newest / Oldest by date added
+## Project layout
 
-### 🎠 Recommended Shows Carousel
+```
+src/
+  api/podcastApi.js          Single fetch layer (previews + show-by-id)
+  utils/                     genres.js, formatDate.js, text.js
+  hooks/
+    useShowListQuery.js      URL-synced search/genre/sort/pagination (DJS05, extended)
+    useShowDetail.js         Fetch a show for the routed detail page
+    useQuickView.js          Fetch + open/close state for the quick-view modal
+  components/
+    Header/, Hero/, Filters/, ShowGrid/, ShowCard/, QuickViewModal/,
+    Pagination/, StatusStates/, GenreTags/, SeasonAccordion/, EpisodeCard/
+  pages/
+    HomePage.jsx             Hero + Filters + grid + pagination + quick view
+    ShowDetailPage.jsx       Full show page with season/episode accordion
+    NotFoundPage.jsx
+```
 
-- Add a **horizontally scrollable carousel** to the landing page
-- Show each show’s **image, title, and genre tags**
-- Support **looping** and navigation via **swipe or arrows**
-- Clicking a carousel item should navigate to the **show’s detail page**
-
-### 🌗 Theme Toggle
-
-- Include a **toggle** for switching between light and dark mode
-- **Persist theme selection** using `localStorage`
-- Ensure the **entire app UI updates smoothly**
-- Use **appropriate icons** (e.g., sun/moon) to indicate current theme
-- Reflect selected theme across all views and components
-
-## 🌟 Stretch Goal – Listening Progress (Optional)
-
-- Save playback position per episode and **resume playback**
-- Mark episodes as **"finished"** once fully played
-- Display **progress indicators** for episodes in progress
-- Allow users to **reset listening history**
-- Save listening history in local storage
-
-## ✅ Deliverables
-
-- A fully functional and deployed podcast app
-- Source code in **GitHub** with clear commit history
-- Live demo link (**Vercel**)
-- (Optional) Short demo video
-
-## 💡 Tips
-
-- Prioritise **user experience** and **clean component structure**
-- Use **React best practices** (components, hooks, state management)
-- Ensure the app is **responsive** and **mobile-friendly**
-- Test localStorage and audio persistence thoroughly
-- Make use of the **React ecosystem** to accelerate development!
-
----
-
-## 🧑‍⚖️ Panel Review
-
-After submitting your project, you will be required to present your work to a coach or panel of coaches.
-
-During this session, you must:
-
-- **Demonstrate** all the features you have implemented in your application.
-- **Explain** how each feature was built, referring directly to your code (e.g., components, state, hooks, storage).
-- Discuss the **decisions** you made during development (e.g., choice of libraries, structure, naming conventions).
-- Break down the **logic** behind key functionalities (e.g., how audio persistence or favouriting works).
-- Be prepared to answer **questions** from the coaches about your project, code structure, and implementation choices.
-
-This is your opportunity to showcase both your technical and problem-solving skills—treat it like a real-world project revsiew.
+All components carry JSDoc comments, and the visual system (colors,
+spacing, type) lives in `src/styles/tokens.css` so every screen — grid,
+detail page, and modal — is styled consistently.
