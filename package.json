@@ -1,22 +1,29 @@
 {
-  "name": "podcast-explorer-unified",
+  "name": "phumav25567_pto2508_group-b_phuthuma-mavuso_djspp",
   "version": "1.0.0",
-  "private": true,
-  "description": "Unified Podcast Explorer — merges DJS03 (quick-view modal), DJS04 (search/sort/filter/pagination toolbar), and DJS05 (routed show-detail pages with URL-synced query state) into a single application.",
-  "type": "module",
+  "description": "",
+  "main": "index.js",
   "scripts": {
-    "dev": "vite",
-    "build": "vite build",
-    "preview": "vite preview",
-    "lint": "eslint src --ext .js,.jsx --report-unused-disable-directives"
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Phuthuma-tech/PHUMAV25567_pto2508_Group-B_Phuthuma-Mavuso_DJSPP.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/Phuthuma-tech/PHUMAV25567_pto2508_Group-B_Phuthuma-Mavuso_DJSPP/issues"
+  },
+  "homepage": "https://github.com/Phuthuma-tech/PHUMAV25567_pto2508_Group-B_Phuthuma-Mavuso_DJSPP#readme",
   "dependencies": {
-    "react": "^18.3.1",
-    "react-dom": "^18.3.1",
-    "react-router-dom": "^6.23.1"
+    "@vitejs/plugin-react": "^6.0.3",
+    "react": "^19.2.7",
+    "react-dom": "^19.2.7"
   },
   "devDependencies": {
-    "@vitejs/plugin-react": "^4.3.1",
-    "vite": "^5.4.2"
+    "vite": "^8.1.5"
   }
 }
