@@ -1,8 +1,8 @@
 .episode-card {
   display: grid;
-  grid-template-columns: auto auto 1fr;
+  grid-template-columns: auto auto auto 1fr auto;
   align-items: center;
-  gap: var(--space-4);
+  gap: var(--space-3);
   padding: var(--space-3) 0;
   border-bottom: 1px solid var(--color-border-soft);
 }
@@ -16,6 +16,26 @@
   font-size: 0.8rem;
   color: var(--color-text-faint);
   min-width: 24px;
+}
+
+.episode-card__play {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  border: 1px solid var(--color-border);
+  background: var(--color-bg-raised);
+  color: var(--color-accent-strong);
+  font-size: 0.75rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  transition: border-color var(--transition-base), background var(--transition-base);
+}
+
+.episode-card__play:hover {
+  border-color: var(--color-accent);
+  background: var(--color-accent-soft);
 }
 
 .episode-card__image {
@@ -38,14 +58,18 @@
 
 @media (max-width: 480px) {
   .episode-card {
-    grid-template-columns: auto 1fr;
+    grid-template-columns: auto auto 1fr auto;
     grid-template-areas:
-      "number title"
-      "image title";
+      "number play title fav"
+      "image image title fav";
   }
 
+  .episode-card__number { grid-area: number; }
+  .episode-card__play { grid-area: play; }
   .episode-card__image {
+    grid-area: image;
     width: 44px;
     height: 44px;
   }
+  .episode-card__body { grid-area: title; }
 }

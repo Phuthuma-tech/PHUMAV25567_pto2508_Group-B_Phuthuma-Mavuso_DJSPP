@@ -84,7 +84,7 @@ export default function ShowDetailPage() {
         <h2 className="show-detail__seasons-heading">
           Seasons <span className="show-detail__seasons-count">({show.seasons.length})</span>
         </h2>
-        <SeasonAccordion seasons={show.seasons} />
+        <SeasonAccordion seasons={show.seasons} show={{ id: show.id, title: show.title }} />
       </section>
     </article>
   );

@@ -7,11 +7,12 @@ import "./SeasonAccordion.css";
  * so users can switch between seasons without scrolling through every
  * episode in the show at once.
  *
- * @param {{ seasons: Array<Object> }} props
+ * @param {{ seasons: Array<Object>, show: { id: string|number, title: string } }} props
  * @param {Array<Object>} props.seasons - SEASON objects, each with an `episodes` array.
+ * @param {Object} props.show - Parent show's id/title, passed through to each episode for playback and favouriting.
  * @returns {JSX.Element}
  */
-export default function SeasonAccordion({ seasons }) {
+export default function SeasonAccordion({ seasons, show }) {
   const [expandedIndex, setExpandedIndex] = useState(0);
 
   return (
@@ -53,6 +54,8 @@ export default function SeasonAccordion({ seasons }) {
                     episode={episode}
                     number={episodeIndex + 1}
                     image={season.image}
+                    show={show}
+                    season={{ number: season.season, title: season.title }}
                   />
                 ))}
               </ul>

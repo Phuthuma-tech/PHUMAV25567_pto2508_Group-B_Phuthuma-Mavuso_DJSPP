@@ -55,6 +55,10 @@ button {
   padding: var(--space-6) var(--space-5) var(--space-8);
 }
 
+.app-main--with-player {
+  padding-bottom: calc(var(--space-8) + 88px);
+}
+
 .visually-hidden {
   position: absolute;
   width: 1px;
